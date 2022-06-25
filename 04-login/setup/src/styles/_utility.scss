@@ -1,0 +1,27 @@
+$bg: #b4b4ca;
+$bg2: #9d9dc4;
+$primary: #ebf3fb;
+$secondary: #4a4ae4;
+$txt-dark: #46454a;
+$txt-less-dark: #848c94;
+$ffp: "Poppins";
+//mixin
+
+@mixin flex($g: 0, $d: row, $j: center, $a: center) {
+  display: flex;
+  justify-content: $j;
+  align-items: $a;
+  flex-direction: $d;
+  gap: #{$g}em;
+}
+
+@mixin grid($g: 0, $j: center, $a: center) {
+  display: grid;
+  justify-items: $j;
+  align-items: $a;
+  grid-gap: #{$g}em;
+}
+// Another
+.b {
+  border: 2px solid black;
+}
