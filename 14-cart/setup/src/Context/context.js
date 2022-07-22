@@ -1,5 +1,6 @@
-import React, { useState, useContext, useReducer, useEffect } from "react";
-import cartItems from "../data";
+import axios from "axios";
+import React, { useContext, useReducer, useEffect } from "react";
+// import cartItems from "../data";
 import reducer from "./reducer";
 // ATTENTION!!!!!!!!!!
 // I SWITCHED TO PERMANENT DOMAIN
@@ -8,7 +9,7 @@ const AppContext = React.createContext();
 
 const initialState = {
   loading: false,
-  cart: cartItems,
+  cart: [],
   total: 0,
   amount: 0,
 };
@@ -18,22 +19,40 @@ const AppProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: `CLEAR_CART` });
   };
-  const incAmount = (id) => {
-    dispatch({ type: `INCREASE_AMOUNT`, payload: { id } });
+
+  const updateAmount = (id, mode) => {
+    dispatch({ type: `UPDATE_AMOUNT`, payload: { id, mode } });
   };
-  const decAmount = (id) => {
-    dispatch({ type: `DECREASE_AMOUNT`, payload: { id } });
-  };
+
+  // const incAmount = (id) => {
+  //   dispatch({ type: `INCREASE_AMOUNT`, payload: { id } });
+  // };
+  // const decAmount = (id) => {
+  //   dispatch({ type: `DECREASE_AMOUNT`, payload: { id } });
+  // };
+
   const removeSingleItem = (id) => {
     dispatch({ type: `REMOVE_SINGLE_ITEM`, payload: { id } });
   };
+
   useEffect(() => {
-    dispatch({ type: `UPDATE_CART` });
+    dispatch({ type: `GET_TOTALS` });
   }, [state.cart]);
+
+  //Fetch Data//
+  const fetchData = async () => {
+    dispatch({ type: `LOADING` });
+    const { data: cart } = await axios.get(url);
+    dispatch({ type: `FETCH_CARTITEMS`, payload: { cart } });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <AppContext.Provider
-      value={{ ...state, clearCart, removeSingleItem, incAmount, decAmount }}
+      value={{ ...state, clearCart, removeSingleItem, updateAmount }}
     >
       {children}
     </AppContext.Provider>
