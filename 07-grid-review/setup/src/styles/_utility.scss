@@ -1,0 +1,59 @@
+// * Fonts..
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+// * Vars
+// ! Colors
+// Cards..
+$card-crimson: #e42c6a;
+$card-dark: #292930;
+$card-green: #3eb650;
+$card-light-red: #ee7879;
+$card-deep-blue: #2a3166;
+$card-light-cyan: #cae7df;
+$card-dark-blue: #28559a;
+// background
+$bg: #eaf0ff;
+//box-shadows
+$bs-1: 1px 5px 7px rgba(0, 0, 0, 0.3);
+//
+$ffp: "Poppins";
+
+// * mixin
+
+@mixin flex($g: 0, $d: row, $j: center, $a: center) {
+  display: flex;
+  justify-content: $j;
+  align-items: $a;
+  flex-direction: $d;
+  gap: #{$g}em;
+}
+
+@mixin grid($g: 0, $j: center, $a: center) {
+  display: grid;
+  justify-items: $j;
+  align-items: $a;
+  grid-gap: #{$g}em;
+}
+
+@mixin mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+// Another
+.bd {
+  border: 2px solid black;
+}

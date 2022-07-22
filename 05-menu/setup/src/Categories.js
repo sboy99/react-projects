@@ -1,7 +1,7 @@
 import React from "react";
 
 const Categories = ({ categories, filter }) => {
-  const active = (id) => {
+  const activeClass = (id) => {
     document.querySelectorAll(".filter-btn").forEach((item) => {
       item.classList.remove("active");
     });
@@ -19,7 +19,7 @@ const Categories = ({ categories, filter }) => {
               id={i}
               onClick={() => {
                 filter(category);
-                active(i);
+                activeClass(i);
               }}
             >
               {category}

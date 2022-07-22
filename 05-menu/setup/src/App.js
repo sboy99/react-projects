@@ -3,14 +3,11 @@ import Menu from "./Menu";
 import Categories from "./Categories";
 import items from "./data";
 
+const allCategories = ["all", ...new Set(items.map((item) => item.category))];
+
 function App() {
   const [menuItems, setMenuItems] = useState(items);
-  const [categories, setCategories] = useState([
-    "all",
-    "breakfast",
-    "lunch",
-    "shakes",
-  ]);
+  const [categories, setCategories] = useState(allCategories);
 
   //filter by category
   const filterItems = (category) => {
